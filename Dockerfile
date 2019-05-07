@@ -19,9 +19,7 @@ ARG AGENT_WORKDIR=/home/${user}/agent
 
 RUN curl --create-dirs -fsSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar \
   && chmod 755 /usr/share/jenkins \
-  && chmod 644 /usr/share/jenkins/slave.jar \
-  && cp /usr/share/jenkins/slave.jar /usr/local/bin/jenkins-slave \
-  && chmod 644 /usr/local/bin/jenkins-slave
+  && chmod 755 /usr/share/jenkins/slave.jar
 
 USER ${user}
 ENV AGENT_WORKDIR=${AGENT_WORKDIR}
