@@ -31,4 +31,4 @@ VOLUME /home/${user}/.jenkins
 VOLUME ${AGENT_WORKDIR}
 WORKDIR /home/${user}
 
-ENTRYPOINT ["jenkins-slave"]
+ENTRYPOINT ["/usr/share/jenkins/slave.jar"]
