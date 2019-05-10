@@ -24,6 +24,14 @@ RUN curl --create-dirs -fsSLo /usr/share/jenkins/slave.jar https://repo.jenkins-
 COPY jenkins-slave /usr/local/bin/jenkins-slave
 RUN chmod 755 /usr/local/bin/jenkins-slave
 
+RUN apt install -y sudo
+
+RUN fallocate -l 3G /swapfile \
+  && chmod 600 /swapfile \
+  && mkswap /swapfile \
+  && swapon /swapfile \
+  && echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
+
 USER ${user}
 ENV AGENT_WORKDIR=${AGENT_WORKDIR}
 RUN mkdir /home/${user}/.jenkins && mkdir -p ${AGENT_WORKDIR}
