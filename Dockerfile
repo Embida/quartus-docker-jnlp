@@ -3,7 +3,7 @@ MAINTAINER Erik Liland <erik.liland@embida.no>
 LABEL Description="This is a Quartus Jenkins Slave image, which allows connecting Jenkins agents via JNLP protocols" 
 
 RUN apt update
-RUN apt install -y repo docker build-essential default-jdk python-dev python-pip python3-dev python3-pip libc6-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi gcc-arm-linux-gnueabihf libncurses5-dev flex bison curl  apt-transport-https  ca-certificates  software-properties-common icedtea-netx icedtea-plugin debconf debconf-utils debootstrap  qemu-user-static htop 
+RUN apt install -y repo build-essential python-dev python-pip python3-dev python3-pip curl
 
 ARG VERSION=3.29
 ARG user=jenkins
@@ -31,5 +31,6 @@ RUN mkdir /home/${user}/.jenkins && mkdir -p ${AGENT_WORKDIR}
 VOLUME /home/${user}/.jenkins
 VOLUME ${AGENT_WORKDIR}
 WORKDIR /home/${user}
+RUN echo "export $(cat /etc/environment)" >> /home/${user}/.bashrc
 
 ENTRYPOINT ["jenkins-slave"]
